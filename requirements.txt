@@ -6,4 +6,5 @@ joblib
 matplotlib
 seaborn
 plotly
+os
 streamlit-aggrid
