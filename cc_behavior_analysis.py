@@ -9,6 +9,7 @@ import json
 import plotly.graph_objects as go
 from st_aggrid import AgGrid, GridOptionsBuilder
 from streamlit.components.v1 import html
+import os
 
 credit_cards_db = {
      "travel": [
@@ -135,11 +136,12 @@ loan_data = pd.DataFrame([
 ])
 
 # Load trained model & preprocessors
-MODEL_PATH = "E:\Credit Card User Behaviour Analysis\spending_model.pkl"
-SCALER_PATH = "E:\Credit Card User Behaviour Analysis\scaler.pkl"
-LABEL_ENCODERS_PATH = "E:\Credit Card User Behaviour Analysis\label_encoders.pkl"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# Load model & preprocessing tools
+MODEL_PATH = os.path.join(BASE_DIR, "spending_model.pkl")
+SCALER_PATH = os.path.join(BASE_DIR, "scaler.pkl")
+LABEL_ENCODERS_PATH = os.path.join(BASE_DIR, "label_encoders.pkl")
+
 spending_model = joblib.load(MODEL_PATH)
 scaler = joblib.load(SCALER_PATH)
 label_encoders = joblib.load(LABEL_ENCODERS_PATH)
@@ -439,3 +441,4 @@ with tab3:
                 """, unsafe_allow_html=True)
         else:
             st.error("❌ Sorry, based on the provided inputs, no loan matches your profile right now.")
+
